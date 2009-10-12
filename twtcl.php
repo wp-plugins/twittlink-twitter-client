@@ -3,7 +3,7 @@
 Plugin Name: TwittLink Twitter Client
 Plugin URI: http://www.twittlink.com/tlc
 Description: Adds a Twitter Client to your blog
-Version: 1.0
+Version: 1.1
 Author: TwittLink
 Author URI: http://www.twittlink.com
 */
@@ -19,7 +19,7 @@ add_option('tlc_showbtn', "true");
 add_option('tlc_route_twitter', "true");
 add_option('tlc_showbtn_img', '');
 add_option('tlc_showonline', "true");
-add_option('tlc_noconflicts', "false");
+add_option('tlc_noconflicts', "true");
 
 function tlc_options()
 {
@@ -173,7 +173,8 @@ function tlc_options_page()
                         <input type="radio" value="false" <?php if (get_option('tlc_noconflicts') == "false") echo 'checked="checked"'; ?> name="tlc_noconflicts" group="tlc_noconflicts"/> 
                         <label for="tlc_noconflicts">No</label>     
                     </p>
-                </td>
+		    <p>If Twittlink Client is not working properly you can switch this option to false.</p>
+		</td>
             </tr> 
         </table>
         <input type="hidden" name="action" value="update" />
@@ -181,6 +182,7 @@ function tlc_options_page()
         <p class="submit">
             <input type="submit" name="Submit" value="<?php _e('Update Settings') ?>" />
         </p>
+	<p><strong>If you experience problems with this plugin please send us an email at <a href="mailto:bug@twittlink.com">bug@twittlink.com</a>. We will do our best to solve them as soon as possible. Thank you!</strong></p>
     </form>
     </div>
 <?php
