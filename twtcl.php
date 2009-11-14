@@ -3,7 +3,7 @@
 Plugin Name: TwittLink Twitter Client
 Plugin URI: http://www.twittlink.com/tlc
 Description: Adds a Twitter Client to your blog
-Version: 1.2
+Version: 1.3
 Author: TwittLink
 Author URI: http://www.twittlink.com
 */
@@ -19,6 +19,7 @@ add_option('tlc_route_twitter', "true");
 add_option('tlc_showbtn_img', '');
 add_option('tlc_showonline', "true");
 add_option('tlc_noconflicts', "true");
+add_option('tlc_delayedload', "true");
 
 function tlc_options()
 {
@@ -39,10 +40,14 @@ function tlc_addfooter()
 	var tlc_showonline=<?php echo get_option('tlc_showonline'); ?>; 
 	var tlc_noconflicts=<?php echo get_option('tlc_noconflicts'); ?>; 
 	var tlc_showbtn_img="<?php echo get_option('tlc_showbtn_img'); ?>"; 
+	var tlc_delayedload=<?php echo get_option('tlc_delayedload'); ?>;
 </script>
+<?php if(get_option('tlc_delayedload') == "true") { ?>
+<script type="text/javascript" src="http://www.twittlink.com/tools/tlc/tlcc.js"></script>
+<?php } else { ?>
 <script type="text/javascript" src="http://www.twittlink.com/tools/tlc/tlc.js"></script>
+<?php } ?>
 <!-- TwittLink Twitter Client Code -->
-
 <?php
 
 }
@@ -161,12 +166,28 @@ function tlc_options_page()
                         <input type="radio" value="false" <?php if (get_option('tlc_noconflicts') == "false") echo 'checked="checked"'; ?> name="tlc_noconflicts" group="tlc_noconflicts"/> 
                         <label for="tlc_noconflicts">No</label>     
                     </p>
-		    <p>If Twittlink Client is not working properly you can switch this option to false.</p>
-		</td>
+				    <p>If Twittlink Client or your Blog is not working properly you can switch this option to No.</p>
+				</td>
+            </tr> 
+            <tr>
+                <th scope="row">
+                    Delayed load ?
+                </th>
+                <td>
+                    <p>
+                        <input type="radio" value="true" <?php if (get_option('tlc_delayedload') == "true") echo 'checked="checked"'; ?> name="tlc_delayedload" group="tlc_delayedload"/>
+                        <label for="tlc_delayedload">Yes</label>     
+                    </p>
+                    <p>
+                        <input type="radio" value="false" <?php if (get_option('tlc_delayedload') == "false") echo 'checked="checked"'; ?> name="tlc_delayedload" group="tlc_delayedload"/> 
+                        <label for="tlc_delayedload">No</label>     
+                    </p>
+				    <p>If you want Twittlink Client to load latter and not affect your blog loading time you can switch this option to Yes.</p>
+				</td>
             </tr> 
         </table>
         <input type="hidden" name="action" value="update" />
-        <input type="hidden" name="page_options" value="tlc_xlocation,tlc_ylocation,tlc_twname,tlc_showbtn,tlc_route_twitter,tlc_showbtn_img,tlc_showonline,tlc_noconflicts"/>
+        <input type="hidden" name="page_options" value="tlc_xlocation,tlc_ylocation,tlc_twname,tlc_showbtn,tlc_route_twitter,tlc_showbtn_img,tlc_showonline,tlc_noconflicts,tlc_delayedload"/>
         <p class="submit">
             <input type="submit" name="Submit" value="<?php _e('Update Settings') ?>" />
         </p>
