@@ -3,7 +3,7 @@
 Plugin Name: TwittLink Twitter Client
 Plugin URI: http://www.twittlink.com/tlc
 Description: Adds a Twitter Client to your blog
-Version: 1.1
+Version: 1.2
 Author: TwittLink
 Author URI: http://www.twittlink.com
 */
@@ -13,7 +13,6 @@ add_action('wp_footer','tlc_addfooter');
  
 add_option('tlc_xlocation', 'left');  
 add_option('tlc_ylocation', '10%'); 
-add_option('tlc_name', '');
 add_option('tlc_twname', '');
 add_option('tlc_showbtn', "true");
 add_option('tlc_route_twitter', "true");
@@ -34,7 +33,6 @@ function tlc_addfooter()
 <script type="text/javascript">
 	var tlc_xpos="<?php echo get_option('tlc_xlocation'); ?>"; 
 	var tlc_ypos="<?php echo get_option('tlc_ylocation'); ?>"; 
-	var tlc_name="<?php echo get_option('tlc_name'); ?>"; 
 	var tlc_twname="<?php echo get_option('tlc_twname'); ?>"; 
 	var tlc_showbtn=<?php echo get_option('tlc_showbtn'); ?>; 
 	var tlc_route_twitter=<?php echo get_option('tlc_route_twitter'); ?>; 
@@ -94,16 +92,6 @@ function tlc_options_page()
                     </p>
                 </td>
             </tr>  
-            <tr>
-                <th scope="row">
-                    You can specify a custom name for Twitter Client ?
-                </th>
-                <td>
-                    <p>
-                        <input type="text" value="<?php echo get_option('tlc_name'); ?>" name="tlc_name"/> 
-                    </p>
-                </td>
-            </tr>
             <tr>
                 <th scope="row">
                     Display TwittLink client button ?
@@ -178,7 +166,7 @@ function tlc_options_page()
             </tr> 
         </table>
         <input type="hidden" name="action" value="update" />
-        <input type="hidden" name="page_options" value="tlc_xlocation,tlc_ylocation,tlc_name,tlc_twname,tlc_showbtn,tlc_route_twitter,tlc_showbtn_img,tlc_showonline,tlc_noconflicts"/>
+        <input type="hidden" name="page_options" value="tlc_xlocation,tlc_ylocation,tlc_twname,tlc_showbtn,tlc_route_twitter,tlc_showbtn_img,tlc_showonline,tlc_noconflicts"/>
         <p class="submit">
             <input type="submit" name="Submit" value="<?php _e('Update Settings') ?>" />
         </p>
